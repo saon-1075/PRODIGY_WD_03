@@ -32,14 +32,14 @@ function checkWin() {
   return false;
 }
 
-// Helper: check win on any given board state for Minimax
+
 function checkWinCondition(boardState, player) {
   return winCombos.some(combo => {
     return combo.every(index => boardState[index] === player);
   });
 }
 
-// Minimax algorithm for hard AI
+
 function minimax(newBoard, player) {
   const availSpots = newBoard
     .map((val, idx) => val === '' ? idx : null)
@@ -94,7 +94,7 @@ function minimax(newBoard, player) {
   return moves[bestMove];
 }
 
-// AI makes its move using minimax
+
 function aiMove() {
   if (!gameActive) return;
 
@@ -109,12 +109,12 @@ function aiMove() {
   }
 }
 
-// Handle user click on a cell
+
 function handleClick(e) {
   const index = e.target.dataset.index;
   if (!gameActive || board[index]) return;
 
-  // Block clicks if AI turn
+
   if (aiEnabled && currentPlayer === 'O') return;
 
   board[index] = currentPlayer;
@@ -125,13 +125,13 @@ function handleClick(e) {
     status.textContent = `Player ${currentPlayer}'s turn`;
 
     if (aiEnabled && currentPlayer === 'O') {
-      // Small delay for AI move for UX
+
       setTimeout(aiMove, 400);
     }
   }
 }
 
-// Reset the game
+
 function resetGame() {
   board.fill('');
   cells.forEach(cell => cell.textContent = '');
@@ -144,14 +144,14 @@ function resetGame() {
   }
 }
 
-// Toggle between User vs User and User vs AI modes
+
 function toggleMode() {
   aiEnabled = !aiEnabled;
   resetGame();
   modeBtn.textContent = aiEnabled ? 'Switch to User vs User' : 'Switch to AI Opponent';
 }
 
-// Event listeners
+
 cells.forEach(cell => cell.addEventListener('click', handleClick));
 resetBtn.addEventListener('click', resetGame);
 modeBtn.addEventListener('click', toggleMode);
